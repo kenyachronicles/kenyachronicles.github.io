@@ -11,21 +11,21 @@
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
 # theme                  : "minimal-mistakes-jekyll"
-# remote_theme           : "mmistakes/minimal-mistakes"
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Site Title"
+title                    : "Kenya Chronicles"
 title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Your Name"
-description              : "An amazing website."
-url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+subtitle                 : "The history and current work of Remember the Poor Inc in Kenya"
+name                     : "Seth Howell"
+description              : "In the 1970s Paul Yoder moved his family to Kenya for three years. He planted a church and held many bible schools. After raising a family of ten, Paul's daughter Rose Ann returned to carry on and expand the work in Kenya, with an emphasis on benevolence."
+url                      : "https://kenyachronicles.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+repository               : "kenyachronicles/kenyachronicles.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
+logo                     : "/assets/images/logo.png" # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
@@ -104,11 +104,11 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Name"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
-  location         : "Somewhere"
-  email            :
+  name             : "Seth Howell"
+  avatar           : "/assets/images/bio-seth.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  bio              : "I am Rose Ann's youngest son, aiming to be a disciple of Jesus and working as a Software Engineer in Boston, where I have a wonderful church family."
+  location         : "Boston, MA, USA"
+  email            : "seth.howell@sattler.edu"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
@@ -287,6 +287,6 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: # true
+      comments: true
       share: true
       related: true
