@@ -18,7 +18,7 @@ minimal_mistakes_skin    : "default" #  "default", "air", "aqua", "contrast", "d
 locale                   : "en-US"
 title                    : "Kenya Chronicles"
 title_separator          : "-"
-subtitle                 : "The history and current work of Remember the Poor Inc in Kenya"
+subtitle                 : "The history and work of Remember the Poor Inc. in Kenya"
 name                     : "Seth Howell"
 description              : "In the 1970s Paul Yoder moved his family to Kenya for three years. He planted a church and held many bible schools. After raising a family of ten, Paul's daughter Rose Ann returned to carry on and expand the work in Kenya, with an emphasis on benevolence."
 url                      : "https://kenyachronicles.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
@@ -101,14 +101,28 @@ analytics:
     tracking_id          : "G-T9RDDLNMSN"
     anonymize_ip         : # true, false (default)
 
+# Cloudinary
+cloudinary:
+  cloud_name: "ddnivuyp6"
+  only_prod: true
+  verbose: true
+  origin_url: https://res.cloudinary.com/
+  presets:
+    default:
+      min_width: 320
+      max_width: 1600
+      fallback_max_width: 800
+      steps: 5
+      sizes: "(min-width: 50rem) 50rem, 90vw"
+
 
 # Site Author
 author:
   name             : "Seth Howell"
-  avatar           : "/assets/images/bio-seth.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/bio-seth2.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Hey there 👋 I am Seth, the youngest of Rose Ann's 10 kids. I'm telling the story of how God used a stay-at-home homeschool mom to eventually rescue over 100 street children."
   location         : "Boston, MA, USA"
-  email            : "seth.howell@sattler.edu"
+  email            : "seth.howell22@sattler.edu"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
@@ -299,5 +313,3 @@ defaults:
     values:
       layout: single
       author_profile: true
-
-  
