@@ -88,38 +88,4 @@ slides:
     text: "Paul standing with a Kenyan man, circa 2007."
 ---
 
-{% assign image_path = '/assets/images/prologue/' %}
-{% assign thumbnail_path = '/assets/images/prologue/thumbnails/' %}
-
-
-<h3>Photos and Descriptions</h3>
-
-Tap on a photo to get the full resolution.
-
-<div class="slideshow-container">
-    {% for item in page.slides %}
-    <div class="img-container fade">
-        <div class="numbertext">{{ forloop.index }} / {{ forloop.length }}</div>
-        <figure class="">
-        <a style="width:100%" href="{{ image_path }}{{ item.image }}">
-            <img class="crop container" src="{{ image_path }}{{ item.image }}">
-        </a>
-        <figcaption>{{ item.text }}</figcaption>
-        </figure>
-    </div>
-    {% endfor %}
-    <a class="prev" onclick="plusSlides(-1)">❮</a>
-    <a class="next" onclick="plusSlides(1)">❯</a> 
-</div>
-<div class="thumbnails-container">
-    <div class="thumbnails">
-        {% for item in page.slides %}
-        <img 
-            class="thumbnail" 
-            onclick="currentSlide( {{ forloop.index }} )"
-            src="{{ thumbnail_path }}{{ item.image }}"
-        />
-        {% endfor %}
-    </div>
-</div>
-<br>
+<h1>Under Construction</h1>
