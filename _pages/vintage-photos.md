@@ -1,24 +1,11 @@
 ---
-toc: true
-slider: true
 permalink: /vintage-photos/
 title: "Vintage Photos"
-title: "Prologue"
-# tagline: "The roots of Remember the Poor Inc"
+slider: 'slider'
+tagline: "The Yoders in Kenya, 1970+"
 header:
-#   image: /assets/images/prologue/train.jpg # OR
-  teaser: /assets/images/prologue/coffee-worker.jpg
-  # overlay_image: /assets/images/prologue/train.jpg
-#   overlay_filter: 0.5 # same as adding an opacity of 0.5 to a black background
+  overlay_image: /assets/images/prologue/coffee-worker.jpg
   show_overlay_excerpt: false
-  # caption: "Paul with daughters Rose Ann & Peggy on a train to Mombassa"
-#   actions:
-#     - label: "Learn more"
-#       url: "https://unsplash.com"
-categories:
-#   - Layout
-tags:
-  - history
 last_modified_at: 2023-01-30T16:00:52-04:00
 slides:
   - image: nairobi.jpg
@@ -102,84 +89,37 @@ slides:
 ---
 
 {% assign image_path = '/assets/images/prologue/' %}
+{% assign thumbnail_path = '/assets/images/prologue/thumbnails/' %}
 
-HEY THERE!
 
-<div id="main_wrapper">
-      <div id="slides_wrapper">
-        <div id="slide_left" class="slide_arrow"><span>&#10094;</span></div>
-        <div id="slides">
+<h3>Photos and Descriptions</h3>
+
+Tap on a photo to get the full resolution.
+
+<div class="slideshow-container">
+    {% for item in page.slides %}
+    <div class="img-container fade">
+        <div class="numbertext">{{ forloop.index }} / {{ forloop.length }}</div>
+        <figure class="">
+        <a style="width:100%" href="{{ image_path }}{{ item.image }}">
+            <img class="crop container" src="{{ image_path }}{{ item.image }}">
+        </a>
+        <figcaption>{{ item.text }}</figcaption>
+        </figure>
+    </div>
+    {% endfor %}
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a> 
+</div>
+<div class="thumbnails-container">
+    <div class="thumbnails">
         {% for item in page.slides %}
-          {% if forloop.index0 == 0 %}
-          <figure>
-      <a href="{{ image_path }}{{ item.image }}"><img
-            data-index="0"
-            class="slide active"
-            src="{{ image_path }}{{ item.image }}"
-            alt=""
-          /></a>
-      <figcaption>{{ item.text }}</figcaption>
-    </figure>
-          <img
-            data-index="0"
-            class="slide active"
-            src="{{ image_path }}{{ item.image }}"
-            alt=""
-          />
-          {% else %}
-          <figure>
-      <a href="{{ image_path }}{{ item.image }}"><img
-            data-index="{{ forloop.index0 }}"
-            class="slide active"
-            src="{{ image_path }}{{ item.image }}"
-            alt=""
-          /></a>
-      <figcaption>{{ item.text }}</figcaption>
-    </figure>
-          {% endif %}
+        <img 
+            class="thumbnail" 
+            onclick="currentSlide( {{ forloop.index }} )"
+            src="{{ thumbnail_path }}{{ item.image }}"
+        />
         {% endfor %}
-        </div>
-        <div id="slide_right" class="slide_arrow"><span>&#10095;</span></div>
-      </div>
-  <div id="thumbnails">
-    {% for item in page.slides %}
-      {% if forloop.index0 == 0 %}
-      <img
-        data-index="0"
-        class="thumbnail active"
-        src="{{ image_path }}{{ item.image }}"
-        alt=""
-      />
-      {% else %}
-      <img
-        data-index="{{ forloop.index0 }}"
-        class="thumbnail"
-        src="{{ image_path }}{{ item.image }}"
-        alt=""
-      />
-      {% endif %}
-    {% endfor %}
-  </div>
+    </div>
 </div>
-
-
-
-<!-- <div class="slideshow-container">
-  {% for item in page.slides %}
-  <div class="mySlides fade">
-    <div class="numbertext">{{ forloop.index }} / {{ forloop.length }}</div>
-    <figure>
-      <a href="{{ image_path }}{{ item.image }}"><img class="cropped" src="{{ image_path }}{{ item.image }}"></a>
-      <figcaption>{{ item.text }}</figcaption>
-    </figure>
-  </div>
-  {% endfor %}
-  <a class="prev" onclick="plusSlides(-1)">❮</a>
-  <a class="next" onclick="plusSlides(1)">❯</a> 
-  <div class="dots">
-    {% for item in page.slides %}
-    <span class="dot" onclick="currentSlide( {{ forloop.index }} )"></span> 
-    {% endfor %}
-  </div>
-</div>
-<br> -->
+<br>

@@ -1,161 +1,192 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 
-* {
-  box-sizing: border-box;
+:root {
+  --slider_width: 1000px;
+  --slider_height: 400px;
 }
 
-div#slides_wrapper {
-  width: 400px;
-  display: flex;
-  border: 2px solid #efefef;
-  justify-content: space-between;
-  margin-bottom: 20px;
+/* body {font-family: Verdana, sans-serif; } */
+
+/* Slideshow container */
+.slideshow-container {
+  width: 70%;
+  max-width: var(--slider_width);
+  max-height: var(--slider_height);
+  position: relative;
+  margin-right: 10px;
+  margin-bottom: 100px;
+  float:left;
 }
 
-div#slides_wrapper div#slides {
-  width: 300px;
+.img-container {
+  width: 100%; 
+  display: none;
+}
+
+figure {
+  margin-top:0px; 
+}
+
+.container {
+  width: 100%; 
+  max-height: var(--slider_height);
+}
+
+.crop {
+  width: 100%;
+  object-fit: cover; 
+  object-position: center;  
   overflow: hidden;
-  display: flex;
 }
 
-figure.slide {
-  width: 100%;
-  display: none;
+/* Next & previous buttons */
+.prev, .next {
+  background-color: rgba(0,0,0,0.2);
+  cursor: pointer;
+  position: absolute;
+  top: 150px;
+  width: auto;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 5px;
+  user-select: none;
 }
 
-figure.slide.active {
-  display: block;
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
 }
 
-img.slide {
-  width: 100%;
-  display: none;
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
 }
 
-img.slide.active {
-  display: block;
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  margin: 3px;
+  padding: 5px;
+  position: absolute;
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 0 3px 3px 0;
+  top: 0px;
 }
 
-img.thumbnail {
-  width: 50px;
-  height: 50px;
+.thumbnails-container {
+  justify-content: center;
+  position: relative;
+  height: 308px;
+  width: 80px;
+  border-radius: 3px;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.thumbnails {
+  display: inline-block;
+  align-items: center;
+  width: 80px;
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.thumbnail {
+  cursor: pointer;
+  width: 70px;
+  height: 70px;
+  margin: 5px;
   object-fit: cover;
   object-position: center;
 }
 
-div.slide_arrow {
-  font-size: 20px;
-  background-color: #0f0f0f;
-  color: #f0f0f0;
-  height: 40px;
-  width: 40px;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  align-self: center;
+.active, .thumbnail:hover {
+  filter: brightness(150%);
 }
 
-div.slide_arrow:hover {
-  cursor: pointer;
+.active {
+  border: 2px solid white;
 }
 
-div.slide_arrow#slide_left {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
 }
 
-div.slide_arrow#slide_right {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
 }
 
-div#thumbnails {
-  width: 400px;
-  display: flex;
-  flex-wrap: wrap;
-  /* justify-content: space-around; */
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 400px) {
+  .prev, .next,.text {font-size: 11px}
+  .slideshow-container {
+    width: 95%;
+    align-content: center;
+    margin-right: 0px;
+    float: none;
+  }
+  .thumbnail {
+    width: 60px;
+    height: 60px;
+    margin: 4px;
+  }
+  .thumbnails {
+    white-space: nowrap;
+    height: 70px;
+    width: 92%;
+    overflow-x: scroll;
+  }
+  .thumbnails-container {
+    justify-items: center;
+    height: 70px;
+    width: 95%;
+  }
 }
-
-div#thumbnails img.thumbnail {
-  background-color: #888;
-  margin: 5px;
-}
-
-div#thumbnails img.thumbnail:hover {
-  cursor: pointer;
-}
-
-div#thumbnails img.thumbnail.active {
-  border: 2px solid #0ff;
-}
-
 </style>
 </head>
+<body>
+
 
 
 <script>
-let leftArrow = document.querySelector("#slide_left");
-let rightArrow = document.querySelector("#slide_right");
-let slidesContainer = document.querySelector("#slides");
+let slideIndex = 1;
+showSlides(slideIndex);
 
-let applyThumbnail = function (dataIdx) {
-  document.querySelector("#thumbnails > img.active").classList.remove("active");
-  document
-    .querySelector(`#thumbnails > [data-index='${parseInt(dataIdx)}']`)
-    .classList.add("active");
-};
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
 
-let thumbnailClick = function (dataIdx) {
-  document.querySelector("#thumbnails > img.active").classList.remove("active");
-  document
-    .querySelector(`#thumbnails > [data-index='${parseInt(dataIdx)}']`)
-    .classList.add("active");
-  document.querySelector(`#slides > figure.active`).classList.remove("active");
-  document
-    .querySelector(`#slides > [data-index='${parseInt(dataIdx)}']`)
-    .classList.add("active");
-};
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
 
-leftArrow.addEventListener("click", function () {
-  const currentActive = document.querySelector("#slides > figure.active");
-  const prevSibling = currentActive.previousElementSibling;
-  currentActive.classList.remove("active");
-  if (prevSibling) {
-    // Select Prev Image
-    prevSibling.classList.add("active");
-    applyThumbnail(prevSibling.getAttribute("data-index"));
-  } else {
-    // Select Last Image
-    const last = document.querySelector("#slides > :last-child");
-    last.classList.add("active");
-    applyThumbnail(last.getAttribute("data-index"));
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("img-container");
+  let thumbnails = document.getElementsByClassName("thumbnail");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
   }
-});
-
-rightArrow.addEventListener("click", function () {
-  const currentActive = document.querySelector("#slides > img.active");
-  const nextSibling = currentActive.nextElementSibling;
-  currentActive.classList.remove("active");
-  if (nextSibling) {
-    // Select Next Image
-    nextSibling.classList.add("active");
-    applyThumbnail(nextSibling.getAttribute("data-index"));
-  } else {
-    // Select First Image
-    const first = document.querySelector("#slides > :first-child");
-    first.classList.add("active");
-    applyThumbnail(first.getAttribute("data-index"));
+  for (i = 0; i < thumbnails.length; i++) {
+    thumbnails[i].className = thumbnails[i].className.replace(" active", "");
   }
-});
-
-document.querySelectorAll(".thumbnail").forEach(function (elem) {
-  elem.addEventListener("click", function () {
-    thumbnailClick(this.getAttribute("data-index"));
-  });
-});
+  slides[slideIndex-1].style.display = "block";  
+  thumbnails[slideIndex-1].className += " active";
+}
 </script>
+
+</body>
+</html> 

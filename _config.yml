@@ -16,11 +16,11 @@ minimal_mistakes_skin    : "default" #  "default", "air", "aqua", "contrast", "d
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Kenya Chronicles"
+title                    : "Kenya\nChronicles"
 title_separator          : "-"
-subtitle                 : "The history and work of Remember the Poor Inc. in Kenya"
+# subtitle                 : 
 name                     : "Seth Howell"
-description              : "In the 1970s Paul Yoder moved his family to Kenya for three years. He planted a church and held many bible schools. After raising a family of ten, Paul's daughter Rose Ann returned to carry on and expand the work in Kenya, with an emphasis on benevolence."
+description              : "In the 1970s Paul Yoder moved his family to Kenya for three years. He planted a church and held many bible schools. After raising a family of ten, Paul's daughter Rose Ann returned to carry on and expand the work in Kenya, with an emphasis on benevolence. This site aims to chronicle those events."
 url                      : "https://kenyachronicles.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "kenyachronicles/kenyachronicles.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -123,6 +123,7 @@ author:
   bio              : "Hey there 👋 I am Seth, the youngest of Rose Ann's 10 kids. I'm telling the story of how God used a stay-at-home homeschool mom to eventually rescue over 100 street children."
   location         : "Boston, MA, USA"
   email            : "seth.howell22@sattler.edu"
+  home             : "/about/"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
@@ -312,4 +313,4 @@ defaults:
       type: pages
     values:
       layout: single
-      author_profile: true
+      author_profile: false
