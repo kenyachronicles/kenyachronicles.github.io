@@ -295,28 +295,43 @@ function showSlides(n) {
   resizeThumbnails();
 }
 
-// Add touch events for swipe
-let slideshowContainer = document.querySelector(".slideshow-container");
-slideshowContainer.addEventListener("touchstart", touchStart);
-slideshowContainer.addEventListener("touchmove", touchMove);
+// Handle touch events
+let container = document.querySelector('.slideshow-container');
 
-function touchStart(event) {
-  startX = event.touches[0].clientX;
-}
+container.addEventListener('touchstart', function(e) {
+  startX = e.touches[0].clientX;
+});
 
-function touchMove(event) {
-  let moveX = event.touches[0].clientX;
-  let diffX = startX - moveX;
-
-  // Swipe left
-  if (diffX > 50) {
+container.addEventListener('touchend', function(e) {
+  let endX = e.changedTouches[0].clientX;
+  let diff = startX - endX;
+  if (diff > 0) {
     plusSlides(1);
-  }
-  // Swipe right
-  else if (diffX < -50) {
+  } else if (diff < 0) {
     plusSlides(-1);
   }
-}
+});
+// let slideshowContainer = document.querySelector(".slideshow-container");
+// slideshowContainer.addEventListener("touchstart", touchStart);
+// slideshowContainer.addEventListener("touchmove", touchMove);
+
+// function touchStart(event) {
+//   startX = event.touches[0].clientX;
+// }
+
+// function touchMove(event) {
+//   let moveX = event.touches[0].clientX;
+//   let diffX = startX - moveX;
+
+//   // Swipe left
+//   if (diffX > 50) {
+//     plusSlides(1);
+//   }
+//   // Swipe right
+//   else if (diffX < -50) {
+//     plusSlides(-1);
+//   }
+// }
 
 </script>
 
