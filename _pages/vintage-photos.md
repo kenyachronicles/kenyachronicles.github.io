@@ -96,7 +96,8 @@ slides:
 <div id='vintage'>
 <h3>Photos and Descriptions</h3>
 
-<p>(Tap an enlarged photo to get the full content)</p>
+<p>Tap an enlarged photo to get the full content</p>
+<p id="hint-thumbnails">(thumbnails below)</p>
 
 <div class="complete-container">
   <div id="slider" class="slideshow-container">
@@ -126,7 +127,7 @@ slides:
       </div>
   </div>
 </div>
-<span style="height:100px"></span>
+<span id="bottom-span" style="height:100px"></span>
 </div>
 
 <br>

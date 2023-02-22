@@ -17,6 +17,8 @@ h3 {
   font-size: 26px;
 }
 
+#hint-thumbnails { display:none;}
+
 #vintage {
   display: flex;
   flex-direction: column;
@@ -168,6 +170,8 @@ figure {
 
 @media only screen and (max-width: 600px) {
   h3 { font-size: 20px;}
+  #hint-thumbnails { display:contents;}
+  #bottom-span { display:none;}
   body,figcaption { font-size: 13px;}
   .prev, .next {
     font-size: 11px;
@@ -206,28 +210,7 @@ figure {
 
 <script>
 
-  // https://stackoverflow.com/questions/72529850/how-to-make-image-slider-respond-to-thumb-swipe
-// $('#slider').on('touchstart', function(event) {
-//   const xClick = event.originalEvent.touches[0].pageX;
-
-//   $(this).on('touchmove', function(event) {
-//     const xMove = event.originalEvent.touches[0].pageX;
-//     const sensitivityInPx = 5;
-
-//     if (Math.floor(xClick - xMove) > sensitivityInPx) {
-//       plusSlides(1);
-//       $(this).off('touchmove');
-//     } 
-//     else if (Math.floor(xClick - xMove) < -sensitivityInPx) {
-//       plusSlides(-1);
-//       $(this).off('touchmove');
-//     }
-//   });
-// });
-
 let slideIndex = 1;
-let startX;
-
 showSlides(slideIndex);
 window.onresize = resizeThumbnails;
 resizeThumbnails();
