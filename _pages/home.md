@@ -4,8 +4,7 @@ permalink: /
 hidden: true
 header:
   overlay_image: /assets/images/logo-full.png
-excerpt: >
-The history and work of Remember the Poor, Inc. in Kenya
+excerpt: The history and work of Remember the Poor, Inc. in Kenya
 feature_row:
   - image_path: /assets/images/mm-customizable-feature.png
     alt: "customizable"

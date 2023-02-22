@@ -7,19 +7,36 @@
 :root {
   --slider_width: 1000px;
   --slider_height: 400px;
+  --large-thumbnail: 70px;
+  --small-thumbnail: 60px;
 }
 
 /* body {font-family: Verdana, sans-serif; } */
+h3 {
+  margin-top: 0px;
+  font-size: 26px;
+}
 
-/* Slideshow container */
+#vintage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.complete-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 30px;
+}
+
 .slideshow-container {
   width: 70%;
   max-width: var(--slider_width);
   max-height: var(--slider_height);
   position: relative;
-  margin-right: 10px;
-  margin-bottom: 100px;
-  float:left;
 }
 
 .img-container {
@@ -29,15 +46,19 @@
 
 figure {
   margin-top:0px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 70px;
 }
 
 .container {
-  width: 100%; 
+  width: var(--slider_width); 
   max-height: var(--slider_height);
 }
 
 .crop {
-  width: 100%;
   object-fit: cover; 
   object-position: center;  
   overflow: hidden;
@@ -45,7 +66,7 @@ figure {
 
 /* Next & previous buttons */
 .prev, .next {
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0,0,0,0.3);
   cursor: pointer;
   position: absolute;
   top: 150px;
@@ -55,14 +76,19 @@ figure {
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
-  border-radius: 5px;
   user-select: none;
+}
+
+.prev {
+  left: 0;
+  border-radius: 0px 4px 4px 0px;
+
 }
 
 /* Position the "next button" to the right */
 .next {
   right: 0;
-  border-radius: 3px 0 0 3px;
+  border-radius: 4px 0px 0px 4px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
@@ -78,42 +104,56 @@ figure {
   padding: 5px;
   position: absolute;
   background-color: rgba(0,0,0,0.4);
-  border-radius: 0 3px 3px 0;
+  border-radius: 3px;
   top: 0px;
 }
 
 .thumbnails-container {
-  justify-content: center;
-  position: relative;
   height: 308px;
-  width: 80px;
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
   border-radius: 3px;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0,0,0,0.1);
+}
+
+.thumbnails-container:before,
+.thumbnails-container:after {
+  content:"";
 }
 
 .thumbnails {
-  display: inline-block;
+  max-height: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  width: 80px;
-  height: 300px;
+  gap: 7px;
   overflow-y: scroll;
+  position: relative
+}
+
+.thumbails:-webkit-scrollbar {
+  display: none;
 }
 
 .thumbnail {
   cursor: pointer;
-  width: 70px;
-  height: 70px;
-  margin: 5px;
+  width: var(--large-thumbnail);
+  height: var(--large-thumbnail);
+  flex-shrink: 0;
+  border-radius: 3px;
   object-fit: cover;
   object-position: center;
 }
 
 .active, .thumbnail:hover {
-  filter: brightness(150%);
+  filter: brightness(125%);
 }
 
 .active {
-  border: 2px solid white;
+  border: 2px solid yellow;
 }
 
 /* Fading animation */
@@ -127,30 +167,33 @@ figure {
   to {opacity: 1}
 }
 
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 600px) {
+  h3 { font-size: 20px;}
+  body { font-size: 13px;}
   .prev, .next,.text {font-size: 11px}
+  .prev, .next {top:100px;}
+  .complete-container {
+    flex-direction: column;
+    align-items: center;
+  }
   .slideshow-container {
     width: 95%;
-    align-content: center;
-    margin-right: 0px;
-    float: none;
   }
   .thumbnail {
-    width: 60px;
-    height: 60px;
-    margin: 4px;
+    width: var(--small-thumbnail);
+    height: var(--small-thumbnail);
   }
   .thumbnails {
+    flex-direction: row;
     white-space: nowrap;
-    height: 70px;
-    width: 92%;
     overflow-x: scroll;
+    overflow-y: hidden;
   }
   .thumbnails-container {
-    justify-items: center;
-    height: 70px;
+    flex-direction: row;
+    height: 80px !important;
     width: 95%;
+    margin-top: 100px;
   }
 }
 </style>
@@ -158,34 +201,123 @@ figure {
 <body>
 
 
-
 <script>
+
+  // https://stackoverflow.com/questions/72529850/how-to-make-image-slider-respond-to-thumb-swipe
+// $('#slider').on('touchstart', function(event) {
+//   const xClick = event.originalEvent.touches[0].pageX;
+
+//   $(this).on('touchmove', function(event) {
+//     const xMove = event.originalEvent.touches[0].pageX;
+//     const sensitivityInPx = 5;
+
+//     if (Math.floor(xClick - xMove) > sensitivityInPx) {
+//       plusSlides(1);
+//       $(this).off('touchmove');
+//     } 
+//     else if (Math.floor(xClick - xMove) < -sensitivityInPx) {
+//       plusSlides(-1);
+//       $(this).off('touchmove');
+//     }
+//   });
+// });
+
 let slideIndex = 1;
+let startX;
+
 showSlides(slideIndex);
+window.onresize = resizeThumbnails;
+resizeThumbnails();
+
+function resizeThumbnails() {
+  // Adjust thumbnail container height to match image height
+  if (window.innerWidth > 600) {
+    let slides = document.getElementsByClassName("img-container");
+    let img = slides[slideIndex-1].getElementsByTagName("img")[0];
+    if (img.complete) {
+      // Image has already been loaded, trigger the onload event manually
+      onLoad.call(img);
+    } else {
+      img.onload = onLoad;
+    }
+
+    function onLoad() {
+      let height = this.clientHeight;
+      document.getElementsByClassName('thumbnails-container')[0].style.height = height + "px";
+    }
+  }
+}
+
+function centerThumbnail() {
+
+  let thumbnails = document.getElementsByClassName("thumbnail");
+  let container = document.getElementsByClassName('thumbnails')[0];
+  let length = Math.max(container.clientHeight, container.clientWidth) - 65; // 65 accounts for thumbnail size.
+ 
+  if (window.innerWidth <= 600) {
+    container.scrollLeft = thumbnails[slideIndex-1].offsetLeft - length/2;
+  } else {
+    container.scrollTop = thumbnails[slideIndex-1].offsetTop - length/2;
+  }
+}
 
 function plusSlides(n) {
   showSlides(slideIndex += n);
+  centerThumbnail();
 }
 
-function currentSlide(n) {
-  showSlides(slideIndex = n);
+function currentSlide(index) {
+  showSlides(slideIndex = index);
 }
 
 function showSlides(n) {
+
   let i;
   let slides = document.getElementsByClassName("img-container");
   let thumbnails = document.getElementsByClassName("thumbnail");
-  if (n > slides.length) {slideIndex = 1}    
+
+  // Slideshow edges
+  if (n > slides.length) {slideIndex = 1} 
   if (n < 1) {slideIndex = slides.length}
+
+  // Deselect all slides
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";  
   }
+  // Deselect all thumbnails
   for (i = 0; i < thumbnails.length; i++) {
     thumbnails[i].className = thumbnails[i].className.replace(" active", "");
   }
+  // Select current slide and thumbnail
   slides[slideIndex-1].style.display = "block";  
   thumbnails[slideIndex-1].className += " active";
+  
+  resizeThumbnails();
 }
+
+// Add touch events for swipe
+let slideshowContainer = document.querySelector(".slideshow-container");
+slideshowContainer.addEventListener("touchstart", touchStart);
+slideshowContainer.addEventListener("touchmove", touchMove);
+
+function touchStart(event) {
+  startX = event.touches[0].clientX;
+}
+
+function touchMove(event) {
+  let moveX = event.touches[0].clientX;
+  let diffX = startX - moveX;
+
+  // Swipe left
+  if (diffX > 50) {
+    plusSlides(1);
+  }
+  // Swipe right
+  else if (diffX < -50) {
+    plusSlides(-1);
+  }
+}
+
 </script>
 
 </body>

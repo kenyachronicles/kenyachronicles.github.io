@@ -15,6 +15,7 @@ def get_thumbnails(files):
         if filename.endswith(".png") or filename.endswith(".jpg"):
             # Load just once, then successively scale down
             im=Image.open(os.path.join(source, filename))
+            im = im.convert('RGB')
             im.thumbnail((140,140))
             im.save(f"{dest}/{filename}")
      
